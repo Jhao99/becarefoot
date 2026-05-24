@@ -2185,7 +2185,7 @@
       const hint = document.getElementById('cartCheckoutHint');
       btnWrap.innerHTML = `<button class="cart-checkout" id="cartCheckoutBtn" onclick="checkout()">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" style="margin-right:4px;"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
-        <span>${isEN ? 'Secure Checkout · Stripe' : '安全结账 · Stripe'}</span>
+        <span>${isEN ? 'Secure Checkout' : '安全结账'}</span>
       </button>`;
       hint.style.display = 'none';
     }
@@ -2219,7 +2219,7 @@
           ? 'Sorry, checkout is temporarily unavailable. Please order via WhatsApp below.'
           : '抱歉，结账暂时无法使用，请通过下方 WhatsApp 订购。');
         btn.disabled = false;
-        btn.innerHTML = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" style="margin-right:4px;"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg><span>${isEN ? 'Secure Checkout · Stripe' : '安全结账 · Stripe'}</span>`;
+        btn.innerHTML = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" style="margin-right:4px;"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg><span>${isEN ? 'Secure Checkout' : '安全结账'}</span>`;
       }
     }
 
