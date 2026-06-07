@@ -1187,6 +1187,7 @@
       flex: 1;
       overflow-y: auto;
       padding: 20px 28px;
+      -webkit-overflow-scrolling: touch;
     }
     .cart-empty {
       text-align: center;
@@ -1990,80 +1991,13 @@
     </div>
     <div class="cart-body" id="cartBody"></div>
     <div class="cart-footer" id="cartFooter" style="display:none;">
-      <div class="cart-total-row sub">
-        <span class="label"><span class="zh-inline">小计</span><span class="en-inline">Subtotal</span></span>
-        <span class="val" id="cartSubtotal">RM0</span>
-      </div>
-      <div class="cart-total-row sub">
-        <span class="label"><span class="zh-inline">运费</span><span class="en-inline">Shipping</span></span>
-        <span class="val"><span class="zh-inline">免费</span><span class="en-inline">FREE</span></span>
-      </div>
-      <p class="cart-shipping-note" id="cartGiftNote" style="display:none;">🎁 <span class="zh-inline">已符合资格获得免费泡脚桶！</span><span class="en-inline">You've unlocked a FREE foot tub!</span></p>
-      <div class="cart-total-row grand">
+      <div class="cart-total-row grand" style="margin-top:0; padding-top:0; border-top:none;">
         <span class="label"><span class="zh-inline">总计</span><span class="en-inline">Total</span></span>
         <span class="val" id="cartTotal">RM0</span>
       </div>
-
-      <!-- SHIPPING ADDRESS FORM -->
-      <div class="addr-form" id="addrForm">
-        <p class="addr-form-title">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <span class="zh-inline">送货资料</span><span class="en-inline">Delivery Details</span>
-        </p>
-        <div class="addr-field">
-          <label><span class="zh-inline">全名 *</span><span class="en-inline">Full Name *</span></label>
-          <input type="text" id="addrName" placeholder="e.g. Ahmad bin Ali" autocomplete="name" />
-        </div>
-        <div class="addr-field">
-          <label><span class="zh-inline">手机号码 *</span><span class="en-inline">Phone Number *</span></label>
-          <input type="tel" id="addrPhone" placeholder="e.g. 012-3456789" autocomplete="tel" />
-        </div>
-        <div class="addr-field">
-          <label><span class="zh-inline">地址第一行 *</span><span class="en-inline">Address Line 1 *</span></label>
-          <input type="text" id="addrLine1" placeholder="e.g. No. 12, Jalan Damai 3" autocomplete="address-line1" />
-        </div>
-        <div class="addr-field">
-          <label><span class="zh-inline">地址第二行</span><span class="en-inline">Address Line 2</span></label>
-          <input type="text" id="addrLine2" placeholder="e.g. Taman Damai Jaya" autocomplete="address-line2" />
-        </div>
-        <div class="addr-row">
-          <div class="addr-field">
-            <label><span class="zh-inline">邮递区号 *</span><span class="en-inline">Postcode *</span></label>
-            <input type="text" id="addrPostcode" placeholder="e.g. 14000" maxlength="10" autocomplete="postal-code" />
-          </div>
-          <div class="addr-field">
-            <label><span class="zh-inline">城市 *</span><span class="en-inline">City *</span></label>
-            <input type="text" id="addrCity" placeholder="e.g. Bukit Mertajam" autocomplete="address-level2" />
-          </div>
-        </div>
-        <div class="addr-field">
-          <label><span class="zh-inline">州属 *</span><span class="en-inline">State *</span></label>
-          <select id="addrState" autocomplete="address-level1">
-            <option value="">-- <span class="zh-inline">请选择</span><span class="en-inline">Select State</span> --</option>
-            <option>Johor</option>
-            <option>Kedah</option>
-            <option>Kelantan</option>
-            <option>Kuala Lumpur</option>
-            <option>Labuan</option>
-            <option>Melaka</option>
-            <option>Negeri Sembilan</option>
-            <option>Pahang</option>
-            <option>Penang</option>
-            <option>Perak</option>
-            <option>Perlis</option>
-            <option>Putrajaya</option>
-            <option>Sabah</option>
-            <option>Sarawak</option>
-            <option>Selangor</option>
-            <option>Terengganu</option>
-          </select>
-        </div>
-      </div>
-
       <div id="cartCheckoutButtons"></div>
-      <p class="cart-checkout-hint" id="cartCheckoutHint" style="display:none; font-size:12px; color:var(--muted); text-align:center; margin:10px 0 0; line-height:1.5;"></p>
-      <button onclick="cartViaWhatsApp()" style="width:100%; background:transparent; border:1px solid #25D366; color:#1a8a47; padding:13px; border-radius:6px; font-size:13px; cursor:pointer; font-family:inherit; margin-top:10px; display:flex; align-items:center; justify-content:center; gap:8px; transition:background 0.2s;" onmouseover="this.style.background='rgba(37,211,102,0.08)'" onmouseout="this.style.background='transparent'">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
+      <button onclick="cartViaWhatsApp()" style="width:100%; background:transparent; border:1px solid #25D366; color:#1a8a47; padding:11px; border-radius:6px; font-size:13px; cursor:pointer; font-family:inherit; margin-top:8px; display:flex; align-items:center; justify-content:center; gap:8px; transition:background 0.2s;" onmouseover="this.style.background='rgba(37,211,102,0.08)'" onmouseout="this.style.background='transparent'">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
         <span class="zh-inline">改用 WhatsApp 订购</span><span class="en-inline">Order via WhatsApp instead</span>
       </button>
       <p class="cart-secure">
@@ -2252,6 +2186,7 @@
         return;
       }
 
+      // Build cart items HTML
       let html = '';
       for (const key in cart) {
         const p = products[key];
@@ -2272,22 +2207,81 @@
             <div class="cart-item-subtotal">RM${qty * PRICE}</div>
           </div>`;
       }
-      body.innerHTML = html;
 
       const sub = cartSubtotal();
-      document.getElementById('cartSubtotal').textContent = `RM${sub}`;
+      const giftNote = sub >= GIFT_THRESHOLD
+        ? `<p style="font-size:12px;color:var(--moss);margin:8px 0;">🎁 ${isEN ? "You've unlocked a FREE foot tub!" : "已符合资格获得免费泡脚桶！"}</p>`
+        : '';
+
+      // Subtotals inside body
+      html += `
+        <div style="padding:16px 0 0; border-top:1px solid rgba(107,79,53,0.1); margin-top:8px;">
+          <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-bottom:6px;">
+            <span>${isEN ? 'Subtotal' : '小计'}</span><span>RM${sub}</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-bottom:4px;">
+            <span>${isEN ? 'Shipping' : '运费'}</span><span style="color:var(--moss);">${isEN ? 'FREE' : '免费'}</span>
+          </div>
+          ${giftNote}
+        </div>
+
+        <!-- ADDRESS FORM inside scrollable body -->
+        <div class="addr-form" style="margin-top:20px;">
+          <p class="addr-form-title">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            ${isEN ? 'Delivery Details' : '送货资料'}
+          </p>
+          <div class="addr-field">
+            <label>${isEN ? 'Full Name *' : '全名 *'}</label>
+            <input type="text" id="addrName" placeholder="${isEN ? 'e.g. Ahmad bin Ali' : '例：Ahmad bin Ali'}" autocomplete="name" />
+          </div>
+          <div class="addr-field">
+            <label>${isEN ? 'Phone Number *' : '手机号码 *'}</label>
+            <input type="tel" id="addrPhone" placeholder="e.g. 012-3456789" autocomplete="tel" />
+          </div>
+          <div class="addr-field">
+            <label>${isEN ? 'Address Line 1 *' : '地址第一行 *'}</label>
+            <input type="text" id="addrLine1" placeholder="${isEN ? 'e.g. No. 12, Jalan Damai 3' : '例：No. 12, Jalan Damai 3'}" autocomplete="address-line1" />
+          </div>
+          <div class="addr-field">
+            <label>${isEN ? 'Address Line 2' : '地址第二行'}</label>
+            <input type="text" id="addrLine2" placeholder="${isEN ? 'e.g. Taman Damai Jaya' : '例：Taman Damai Jaya'}" autocomplete="address-line2" />
+          </div>
+          <div class="addr-row">
+            <div class="addr-field">
+              <label>${isEN ? 'Postcode *' : '邮递区号 *'}</label>
+              <input type="text" id="addrPostcode" placeholder="e.g. 14000" maxlength="10" autocomplete="postal-code" />
+            </div>
+            <div class="addr-field">
+              <label>${isEN ? 'City *' : '城市 *'}</label>
+              <input type="text" id="addrCity" placeholder="${isEN ? 'e.g. Bukit Mertajam' : '例：槟城'}" autocomplete="address-level2" />
+            </div>
+          </div>
+          <div class="addr-field">
+            <label>${isEN ? 'State *' : '州属 *'}</label>
+            <select id="addrState" autocomplete="address-level1">
+              <option value="">-- ${isEN ? 'Select State' : '请选择'} --</option>
+              <option>Johor</option><option>Kedah</option><option>Kelantan</option>
+              <option>Kuala Lumpur</option><option>Labuan</option><option>Melaka</option>
+              <option>Negeri Sembilan</option><option>Pahang</option><option>Penang</option>
+              <option>Perak</option><option>Perlis</option><option>Putrajaya</option>
+              <option>Sabah</option><option>Sarawak</option><option>Selangor</option>
+              <option>Terengganu</option>
+            </select>
+          </div>
+          <div style="height:16px;"></div>
+        </div>`;
+
+      body.innerHTML = html;
       document.getElementById('cartTotal').textContent = `RM${sub}`;
-      document.getElementById('cartGiftNote').style.display = sub >= GIFT_THRESHOLD ? 'block' : 'none';
       footer.style.display = 'block';
 
-      // Single checkout button → backend creates one Stripe session with all items + quantities
+      // Checkout button
       const btnWrap = document.getElementById('cartCheckoutButtons');
-      const hint = document.getElementById('cartCheckoutHint');
       btnWrap.innerHTML = `<button class="cart-checkout" id="cartCheckoutBtn" onclick="checkout()">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" style="margin-right:4px;"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
         <span>${isEN ? 'Secure Checkout' : '安全结账'}</span>
       </button>`;
-      hint.style.display = 'none';
     }
 
     async function checkout() {
