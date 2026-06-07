@@ -16,12 +16,11 @@ export async function onRequestPost(context) {
       const name = isEN ? (item.name || "Herbal Foot Spa") : (item.nameZH || item.name || "草本泡脚包");
       purposeParts.push(`${name} x${qty}`);
     }
-    // Append delivery address to purpose so it appears in HitPay dashboard
     let purpose = purposeParts.join(", ");
     if (address) {
-      const addrStr = [address.name, address.phone, address.line1, address.line2, address.postcode, address.city, address.state, address.country]
+      const addrStr = [address.line1, address.line2, address.postcode, address.city, address.state, address.country]
         .filter(Boolean).join(", ");
-      purpose += ` | Deliver to: ${addrStr}`;
+      purpose += ` | Deliver to: ${address.name}, ${address.phone}, ${addrStr}`;
     }
     const params = new URLSearchParams();
     params.append("amount", totalAmount.toFixed(2));
@@ -29,10 +28,11 @@ export async function onRequestPost(context) {
     params.append("purpose", purpose);
     params.append("redirect_url", `${origin}/success.html`);
     params.append("allow_repeated_payments", "false");
-    params.append("send_email", "false");
+    params.append("send_email", "true");  // ✅ Send confirmation email to customer
+    params.append("send_sms", "false");
     if (address) {
-      params.append("name", address.name || "");
-      params.append("phone", address.phone || "");
+      if (address.name)  params.append("name", address.name);
+      if (address.phone) params.append("phone", address.phone);
     }
     const res = await fetch("https://api.hit-pay.com/v1/payment-requests", {
       method: "POST",
