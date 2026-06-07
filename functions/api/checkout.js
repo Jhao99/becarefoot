@@ -1,10 +1,10 @@
 // Cloudflare Pages Function: POST /api/checkout
-// Creates a Stripe Checkout Session (one-time payment, MYR) with all cart
-// items and their quantities, then returns the hosted checkout URL.
+// Creates a HitPay payment request and returns the hosted checkout URL.
+// Supports TNG, FPX, GrabPay, ShopeePay, DuitNow, Credit/Debit cards.
 //
-// Your Stripe SECRET key is read from an environment variable set in the
-// Cloudflare dashboard (Settings -> Variables and Secrets):  STRIPE_SECRET_KEY
-// Never hard-code the secret key in this file.
+// Add your HitPay API key in Cloudflare Dashboard:
+// Settings → Variables and Secrets → HITPAY_API_KEY (Secret)
+// Get it from: app.hit-pay.com → Settings → API Keys
 
 export async function onRequestPost(context) {
   const { request, env } = context;
@@ -19,46 +19,50 @@ export async function onRequestPost(context) {
     const isEN = lang === "en";
     const origin = new URL(request.url).origin;
 
-    const params = new URLSearchParams();
-    params.append("mode", "payment");
-    params.append("success_url", `${origin}/success.html?session_id={CHECKOUT_SESSION_ID}`);
-    params.append("cancel_url", `${origin}/?checkout=cancelled`);
+    // Calculate total — price fixed server-side at RM58 per item
+    const UNIT_PRICE = 58;
+    let totalAmount = 0;
+    const purposeParts = [];
 
-    params.append("shipping_address_collection[allowed_countries][0]", "MY");
-    params.append("phone_number_collection[enabled]", "true");
-
-    const UNIT_AMOUNT = 5800; // RM58.00
-    let idx = 0;
     for (const item of items) {
-      const qty = Math.max(1, Math.min(999, parseInt(item.qty) || 1));
+      const qty = Math.max(1, Math.min(99, parseInt(item.qty) || 1));
+      totalAmount += UNIT_PRICE * qty;
       const name = isEN
         ? (item.name || "Herbal Foot Spa")
-        : (item.nameZH || item.name || "Herbal Foot Spa");
-      params.append(`line_items[${idx}][price_data][currency]`, "myr");
-      params.append(`line_items[${idx}][price_data][unit_amount]`, String(UNIT_AMOUNT));
-      params.append(`line_items[${idx}][price_data][product_data][name]`, name);
-      params.append(`line_items[${idx}][quantity]`, String(qty));
-      params.append(`line_items[${idx}][adjustable_quantity][enabled]`, "true");
-      params.append(`line_items[${idx}][adjustable_quantity][minimum]`, "1");
-      params.append(`line_items[${idx}][adjustable_quantity][maximum]`, "99");
-      idx++;
+        : (item.nameZH || item.name || "草本泡脚包");
+      purposeParts.push(`${name} x${qty}`);
     }
 
-    const res = await fetch("https://api.stripe.com/v1/checkout/sessions", {
+    const purpose = purposeParts.join(", ");
+
+    const params = new URLSearchParams();
+    params.append("amount", totalAmount.toFixed(2));
+    params.append("currency", "MYR");
+    params.append("purpose", purpose);
+    params.append("redirect_url", `${origin}/success.html`);
+    params.append("allow_repeated_payments", "false");
+    params.append("send_email", "false");
+
+    const res = await fetch("https://api.hit-pay.com/v1/payment-requests", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${env.STRIPE_SECRET_KEY}`,
+        "X-BUSINESS-API-KEY": env.HITPAY_API_KEY,
         "Content-Type": "application/x-www-form-urlencoded",
+        "X-Requested-With": "XMLHttpRequest",
       },
       body: params.toString(),
     });
 
-    const session = await res.json();
-    if (session.error) {
-      return json({ error: session.error.message }, 500);
+    const data = await res.json();
+
+    if (!res.ok || !data.url) {
+      console.error("HitPay error:", JSON.stringify(data));
+      return json({ error: data.message || "Payment gateway error" }, 500);
     }
-    return json({ url: session.url });
+
+    return json({ url: data.url });
   } catch (err) {
+    console.error("Checkout error:", err.message);
     return json({ error: err.message || "Server error" }, 500);
   }
 }

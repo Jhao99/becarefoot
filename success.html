@@ -7,116 +7,31 @@
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Nunito+Sans:wght@300;400;500;600&family=LXGW+WenKai+TC:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --cream:#f7f2ea; --warm:#ede5d4; --bark:#6b4f35; --moss:#4a5e45;
-      --gold:#b8975a; --dark:#1e1a14; --muted:#7a6e60; --white:#fff;
-    }
-    body {
-      background: var(--cream);
-      font-family: 'Nunito Sans','LXGW WenKai TC',sans-serif;
-      color: var(--dark);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-    }
-    .card {
-      background: var(--white);
-      max-width: 520px;
-      width: 100%;
-      border-radius: 12px;
-      padding: 56px 48px;
-      text-align: center;
-      box-shadow: 0 20px 60px rgba(30,26,20,0.1);
-      animation: rise 0.6s ease;
-    }
-    @keyframes rise { from { opacity:0; transform:translateY(20px);} to {opacity:1; transform:translateY(0);} }
-    .check {
-      width: 80px; height: 80px;
-      background: var(--moss);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 28px;
-      animation: pop 0.5s 0.3s both;
-    }
-    @keyframes pop { from {transform:scale(0);} to {transform:scale(1);} }
-    .check svg { width: 40px; height: 40px; stroke: var(--cream); fill: none; stroke-width: 3; }
-    h1 {
-      font-family: 'Lora','LXGW WenKai TC',serif;
-      font-weight: 600;
-      font-size: 30px;
-      color: var(--bark);
-      margin-bottom: 14px;
-    }
-    p { color: var(--muted); font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
-    .order-id {
-      background: var(--cream);
-      border-radius: 8px;
-      padding: 14px;
-      font-size: 13px;
-      color: var(--bark);
-      margin: 24px 0;
-      word-break: break-all;
-    }
-    .btn {
-      display: inline-block;
-      background: var(--bark);
-      color: var(--cream);
-      padding: 15px 36px;
-      border-radius: 4px;
-      text-decoration: none;
-      font-size: 13px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-top: 16px;
-      transition: background 0.2s;
-    }
-    .btn:hover { background: var(--moss); }
-    .wa-link {
-      display: block;
-      margin-top: 20px;
-      color: var(--moss);
-      font-size: 14px;
-      text-decoration: none;
-      border-bottom: 1px solid var(--gold);
-      width: fit-content;
-      margin-left: auto;
-      margin-right: auto;
-      padding-bottom: 2px;
-    }
-    .logo {
-      font-family: 'Lora',serif;
-      font-size: 22px;
-      font-weight: 400;
-      letter-spacing: 0.08em;
-      color: var(--bark);
-      margin-bottom: 36px;
-    }
-    .logo em { font-style: italic; color: var(--moss); }
+    :root { --cream:#f7f2ea; --bark:#6b4f35; --moss:#4a5e45; --gold:#b8975a; --dark:#1e1a14; --muted:#7a6e60; --white:#fff; }
+    body { background:var(--cream); font-family:'Nunito Sans','LXGW WenKai TC',sans-serif; color:var(--dark); min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px; }
+    .card { background:var(--white); max-width:520px; width:100%; border-radius:12px; padding:56px 48px; text-align:center; box-shadow:0 20px 60px rgba(30,26,20,0.1); animation:rise 0.6s ease; }
+    @keyframes rise { from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);} }
+    .check { width:80px; height:80px; background:var(--moss); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 28px; animation:pop 0.5s 0.3s both; }
+    @keyframes pop { from{transform:scale(0);}to{transform:scale(1);} }
+    .check svg { width:40px; height:40px; stroke:var(--cream); fill:none; stroke-width:3; }
+    h1 { font-family:'Lora','LXGW WenKai TC',serif; font-weight:600; font-size:30px; color:var(--bark); margin-bottom:14px; }
+    p { color:var(--muted); font-size:15px; line-height:1.7; margin-bottom:12px; }
+    .logo { font-family:'Lora',serif; font-size:22px; font-weight:400; letter-spacing:0.08em; color:var(--bark); margin-bottom:36px; }
+    .logo em { font-style:italic; color:var(--moss); }
+    .btn { display:inline-block; background:var(--bark); color:var(--cream); padding:15px 36px; border-radius:4px; text-decoration:none; font-size:13px; letter-spacing:0.1em; text-transform:uppercase; margin-top:24px; transition:background 0.2s; }
+    .btn:hover { background:var(--moss); }
+    .wa-link { display:block; margin-top:20px; color:var(--moss); font-size:14px; text-decoration:none; border-bottom:1px solid var(--gold); width:fit-content; margin-left:auto; margin-right:auto; padding-bottom:2px; }
   </style>
 </head>
 <body>
   <div class="card">
     <div class="logo">be<em>care</em>foot</div>
-    <div class="check">
-      <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
-    </div>
-    <h1>付款成功！</h1>
-    <p>感谢你的订购！🌿 我们已收到你的付款，订单正在处理中。你将很快收到确认信息。</p>
-    <p style="font-size:13px; color:var(--gold);">Payment successful! We've received your order and will process it shortly.</p>
-    <div class="order-id" id="orderId" style="display:none;"></div>
+    <div class="check"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
+    <h1>付款成功！🌿</h1>
+    <p>感谢你的订购！我们已收到你的付款，将尽快处理你的订单。</p>
+    <p style="font-size:13px;color:var(--gold);">Payment successful! We've received your order and will process it shortly.</p>
     <a href="/" class="btn">返回主页 · Back to Home</a>
-    <a href="https://wa.me/60197527397?text=Hi!%20我刚完成订购，想确认订单详情%20🌿" class="wa-link" target="_blank">有疑问？WhatsApp 联系我们 →</a>
+    <a href="https://wa.me/60197527397?text=Hi!%20我刚完成付款，想确认订单详情%20🌿" class="wa-link" target="_blank">有疑问？WhatsApp 联系我们 →</a>
   </div>
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const sid = params.get('session_id');
-    if (sid) {
-      const el = document.getElementById('orderId');
-      el.style.display = 'block';
-      el.textContent = '订单编号 Order Ref: ' + sid.slice(-12).toUpperCase();
-    }
-  </script>
 </body>
 </html>
