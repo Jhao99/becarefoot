@@ -707,6 +707,49 @@
     }
     .faq-footer a:hover { color: var(--moss); }
 
+    /* ── ADDRESS FORM ── */
+    .addr-form { margin-bottom: 16px; }
+    .addr-form-title {
+      font-family: var(--font-serif);
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--bark);
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(107,79,53,0.12);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .addr-field {
+      margin-bottom: 10px;
+    }
+    .addr-field label {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+    .addr-field input, .addr-field select {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid rgba(107,79,53,0.2);
+      border-radius: 6px;
+      font-size: 14px;
+      font-family: inherit;
+      color: var(--dark);
+      background: var(--white);
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    .addr-field input:focus, .addr-field select:focus {
+      border-color: var(--bark);
+    }
+    .addr-field input.error { border-color: #c0392b; }
+    .addr-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
     /* ── ORDER CTA ── */
     .order-cta {
       background: var(--cream);
@@ -1953,13 +1996,70 @@
       </div>
       <div class="cart-total-row sub">
         <span class="label"><span class="zh-inline">运费</span><span class="en-inline">Shipping</span></span>
-        <span class="val" id="cartShipping"><span class="zh-inline">免费</span><span class="en-inline">FREE</span></span>
+        <span class="val"><span class="zh-inline">免费</span><span class="en-inline">FREE</span></span>
       </div>
       <p class="cart-shipping-note" id="cartGiftNote" style="display:none;">🎁 <span class="zh-inline">已符合资格获得免费泡脚桶！</span><span class="en-inline">You've unlocked a FREE foot tub!</span></p>
       <div class="cart-total-row grand">
         <span class="label"><span class="zh-inline">总计</span><span class="en-inline">Total</span></span>
         <span class="val" id="cartTotal">RM0</span>
       </div>
+
+      <!-- SHIPPING ADDRESS FORM -->
+      <div class="addr-form" id="addrForm">
+        <p class="addr-form-title">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span class="zh-inline">送货资料</span><span class="en-inline">Delivery Details</span>
+        </p>
+        <div class="addr-field">
+          <label><span class="zh-inline">全名 *</span><span class="en-inline">Full Name *</span></label>
+          <input type="text" id="addrName" placeholder="e.g. Ahmad bin Ali" autocomplete="name" />
+        </div>
+        <div class="addr-field">
+          <label><span class="zh-inline">手机号码 *</span><span class="en-inline">Phone Number *</span></label>
+          <input type="tel" id="addrPhone" placeholder="e.g. 012-3456789" autocomplete="tel" />
+        </div>
+        <div class="addr-field">
+          <label><span class="zh-inline">地址第一行 *</span><span class="en-inline">Address Line 1 *</span></label>
+          <input type="text" id="addrLine1" placeholder="e.g. No. 12, Jalan Damai 3" autocomplete="address-line1" />
+        </div>
+        <div class="addr-field">
+          <label><span class="zh-inline">地址第二行</span><span class="en-inline">Address Line 2</span></label>
+          <input type="text" id="addrLine2" placeholder="e.g. Taman Damai Jaya" autocomplete="address-line2" />
+        </div>
+        <div class="addr-row">
+          <div class="addr-field">
+            <label><span class="zh-inline">邮递区号 *</span><span class="en-inline">Postcode *</span></label>
+            <input type="text" id="addrPostcode" placeholder="e.g. 14000" maxlength="10" autocomplete="postal-code" />
+          </div>
+          <div class="addr-field">
+            <label><span class="zh-inline">城市 *</span><span class="en-inline">City *</span></label>
+            <input type="text" id="addrCity" placeholder="e.g. Bukit Mertajam" autocomplete="address-level2" />
+          </div>
+        </div>
+        <div class="addr-field">
+          <label><span class="zh-inline">州属 *</span><span class="en-inline">State *</span></label>
+          <select id="addrState" autocomplete="address-level1">
+            <option value="">-- <span class="zh-inline">请选择</span><span class="en-inline">Select State</span> --</option>
+            <option>Johor</option>
+            <option>Kedah</option>
+            <option>Kelantan</option>
+            <option>Kuala Lumpur</option>
+            <option>Labuan</option>
+            <option>Melaka</option>
+            <option>Negeri Sembilan</option>
+            <option>Pahang</option>
+            <option>Penang</option>
+            <option>Perak</option>
+            <option>Perlis</option>
+            <option>Putrajaya</option>
+            <option>Sabah</option>
+            <option>Sarawak</option>
+            <option>Selangor</option>
+            <option>Terengganu</option>
+          </select>
+        </div>
+      </div>
+
       <div id="cartCheckoutButtons"></div>
       <p class="cart-checkout-hint" id="cartCheckoutHint" style="display:none; font-size:12px; color:var(--muted); text-align:center; margin:10px 0 0; line-height:1.5;"></p>
       <button onclick="cartViaWhatsApp()" style="width:100%; background:transparent; border:1px solid #25D366; color:#1a8a47; padding:13px; border-radius:6px; font-size:13px; cursor:pointer; font-family:inherit; margin-top:10px; display:flex; align-items:center; justify-content:center; gap:8px; transition:background 0.2s;" onmouseover="this.style.background='rgba(37,211,102,0.08)'" onmouseout="this.style.background='transparent'">
@@ -2192,6 +2292,40 @@
 
     async function checkout() {
       const isEN = document.body.classList.contains('lang-en');
+
+      // Validate address form
+      const name     = document.getElementById('addrName').value.trim();
+      const phone    = document.getElementById('addrPhone').value.trim();
+      const line1    = document.getElementById('addrLine1').value.trim();
+      const line2    = document.getElementById('addrLine2').value.trim();
+      const postcode = document.getElementById('addrPostcode').value.trim();
+      const city     = document.getElementById('addrCity').value.trim();
+      const state    = document.getElementById('addrState').value.trim();
+
+      const required = [
+        ['addrName', name],
+        ['addrPhone', phone],
+        ['addrLine1', line1],
+        ['addrPostcode', postcode],
+        ['addrCity', city],
+        ['addrState', state],
+      ];
+
+      let hasError = false;
+      required.forEach(([id, val]) => {
+        const el = document.getElementById(id);
+        if (!val) { el.classList.add('error'); hasError = true; }
+        else el.classList.remove('error');
+      });
+
+      if (hasError) {
+        alert(isEN
+          ? 'Please fill in all required delivery fields marked with *'
+          : '请填写所有必填的送货资料（标有 * 的项目）');
+        document.getElementById('addrName').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
       const btn = document.getElementById('cartCheckoutBtn');
       btn.disabled = true;
       btn.innerHTML = isEN ? 'Processing…' : '处理中…';
@@ -2202,11 +2336,13 @@
         qty: cart[key]
       }));
 
+      const address = { name, phone, line1, line2, postcode, city, state, country: 'Malaysia' };
+
       try {
         const res = await fetch('/api/checkout', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ items, lang: isEN ? 'en' : 'zh' })
+          body: JSON.stringify({ items, lang: isEN ? 'en' : 'zh', address })
         });
         const data = await res.json();
         if (data.url) {
